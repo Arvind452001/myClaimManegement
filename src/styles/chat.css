@@ -97,6 +97,36 @@
   }
 }
 
+/* ================= SCROLLBAR STYLING ================= */
+
+/* Custom scrollbar for webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+  background-clip: content-box;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-color: #6366f1 transparent;
+  scrollbar-width: thin;
+}
+
 /* ================= MAIN CONTAINER ================= */
 
 .chat-container {
@@ -107,6 +137,7 @@
   border-radius: 16px;
   overflow: hidden;
   box-shadow: var(--chat-shadow);
+  box-sizing: border-box;
 }
 
 /* ================= CONVERSATION LIST ================= */
@@ -115,10 +146,13 @@
   width: 360px;
   border-right: 1px solid var(--chat-border);
   overflow-y: auto;
+  overflow-x: hidden;
   background: linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .conversation-list-header {
@@ -210,8 +244,11 @@
   padding: 16px 20px;
   gap: 12px;
   overflow-y: auto;
+  overflow-x: hidden;
   background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
   flex: 1;
+  box-sizing: border-box;
+  min-height: 0;
 }
 
 .message-item {

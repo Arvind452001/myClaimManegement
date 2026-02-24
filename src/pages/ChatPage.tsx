@@ -361,10 +361,12 @@ export default function ChatPage() {
       className="d-flex h-100"
       style={{
         height: "100%",
+        width: "100%",
         background: "linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%)",
         overflow: "hidden",
         borderRadius: "16px",
         boxShadow: "0 4px 12px rgba(99, 102, 241, 0.1)",
+        boxSizing: "border-box",
       }}
     >
       {/* LEFT SIDEBAR - CONVERSATION LIST */}
@@ -376,6 +378,8 @@ export default function ChatPage() {
           flexDirection: "column",
           height: "100%",
           background: "linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%)",
+          boxSizing: "border-box",
+          overflow: "hidden",
         }}
       >
         <ConversationList
@@ -400,6 +404,9 @@ export default function ChatPage() {
           flexDirection: "column",
           height: "100%",
           background: "linear-gradient(180deg, #ffffff 0%, #f9fafb 100%)",
+          boxSizing: "border-box",
+          minWidth: 0,
+          overflow: "hidden",
         }}
       >
         {!selectedConversation ? (
@@ -433,6 +440,8 @@ export default function ChatPage() {
               className="flex-grow-1 overflow-auto p-4"
               style={{
                 backgroundColor: "#ffffff",
+                boxSizing: "border-box",
+                minHeight: 0,
               }}
             >
               {messages
