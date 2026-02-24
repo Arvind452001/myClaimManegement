@@ -202,30 +202,45 @@ export default function ChatPage() {
     groupName: string,
     participantIds: string[]
   ) => {
-    if (!socket) return;
+    console.log("[v0] Creating group with:", { groupName, participantIds, currentUserId: currentUser?._id });
 
     try {
       setIsCreatingGroup(true);
 
+      // Include current user in participants
+      const allParticipants = currentUser?._id 
+        ? [...participantIds, currentUser._id]
+        : participantIds;
+
+      console.log("[v0] All participants:", allParticipants);
+
       const res = await conversationAPI.createGroup({
         title: groupName,
-        participants: participantIds,
+        participants: allParticipants,
       });
 
-      const conversation = res.data.data || res.data;
+      console.log("[v0] Group creation response:", res);
+
+      const conversation = res?.data?.data || res?.data;
 
       if (conversation && conversation._id) {
+        console.log("[v0] Group created successfully:", conversation._id);
         setSelectedConversation(conversation);
         setSelectedUser(null);
         setMessages([]);
         setTypingUsers([]);
         setIsGroupModalOpen(false);
 
-        socket.emit("joinConversation", conversation._id);
+        if (socket) {
+          socket.emit("joinConversation", conversation._id);
+        }
+      } else {
+        console.error("[v0] No conversation ID in response");
+        alert("Failed to create group - no conversation returned");
       }
     } catch (err) {
-      console.error("Group creation failed", err);
-      alert("Failed to create group");
+      console.error("[v0] Group creation failed", err);
+      alert(`Failed to create group: ${err instanceof Error ? err.message : "Unknown error"}`);
     } finally {
       setIsCreatingGroup(false);
     }
