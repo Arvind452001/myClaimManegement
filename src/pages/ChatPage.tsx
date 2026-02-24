@@ -9,6 +9,7 @@ import { MessageInput } from "../components/chat/MessageInput";
 import { CreateGroupModal } from "../components/chat/CreateGroupModal";
 import { UserProfileModal } from "../components/chat/UserProfileModal";
 import { Message, Conversation, User } from "../types/chat";
+import "../styles/chat.css";
 
 export default function ChatPage() {
   const { socket, isConnected } = useSocket();
@@ -360,19 +361,21 @@ export default function ChatPage() {
       className="d-flex h-100"
       style={{
         height: "100%",
-        backgroundColor: "#fff",
+        background: "linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%)",
         overflow: "hidden",
+        borderRadius: "16px",
+        boxShadow: "0 4px 12px rgba(99, 102, 241, 0.1)",
       }}
     >
       {/* LEFT SIDEBAR - CONVERSATION LIST */}
       <div
         style={{
           width: "360px",
-          borderRight: "1px solid #e9ecef",
+          borderRight: "1px solid #e5e7eb",
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          backgroundColor: "#ffffff",
+          background: "linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%)",
         }}
       >
         <ConversationList
@@ -396,14 +399,14 @@ export default function ChatPage() {
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          backgroundColor: "#ffffff",
+          background: "linear-gradient(180deg, #ffffff 0%, #f9fafb 100%)",
         }}
       >
         {!selectedConversation ? (
           <div
             className="d-flex justify-content-center align-items-center h-100 text-muted"
             style={{
-              backgroundColor: "#f8f9fa",
+              background: "linear-gradient(135deg, #ffffff 0%, #f9fafb 100%)",
             }}
           >
             <div className="text-center">
