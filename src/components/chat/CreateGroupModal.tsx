@@ -235,11 +235,16 @@ export const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
                     <input
                       type="checkbox"
                       checked={selectedUsers.includes(user._id)}
-                      onChange={() => handleToggleUser(user._id)}
+                      onChange={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleToggleUser(user._id);
+                      }}
                       style={{
                         width: "18px",
                         height: "18px",
                         cursor: "pointer",
+                        pointerEvents: "auto",
                       }}
                     />
                     <div style={{ flex: 1 }}>
