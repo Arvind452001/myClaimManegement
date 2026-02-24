@@ -53,8 +53,8 @@ export default function ChatPage() {
 
         // Fetch conversations
         if (currentUser?._id) {
-          const convRes = await conversationAPI.getConversations();
-          const conversationsData = convRes?.data?.data || convRes?.data || [];
+          const convRes = await conversationAPI.myConversation();
+          const conversationsData = convRes?.data || convRes || [];
           if (Array.isArray(conversationsData)) {
             setConversations(conversationsData);
           }
