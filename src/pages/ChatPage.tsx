@@ -372,6 +372,8 @@ export default function ChatPage() {
         minHeight: "100vh",
         backgroundColor: "#fff",
         overflow: "hidden",
+        borderRadius: "12px",
+        margin: "12px",
       }}
     >
       {/* LEFT SIDEBAR - CONVERSATION LIST */}
@@ -383,6 +385,7 @@ export default function ChatPage() {
           flexDirection: "column",
           height: "100vh",
           backgroundColor: "#ffffff",
+          borderRadius: "12px 0 0 12px",
         }}
       >
         <ConversationList
@@ -407,6 +410,7 @@ export default function ChatPage() {
           flexDirection: "column",
           height: "100vh",
           backgroundColor: "#ffffff",
+          borderRadius: "0 12px 12px 0",
         }}
       >
         {!selectedConversation ? (

@@ -49,7 +49,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({
   };
 
   return (
-    <div className="p-3 border-top bg-white">
+    <div className="p-3 border-top bg-white" style={{ borderRadius: "0 0 12px 0" }}>
       {showEmojiPicker && (
         <div className="mb-2 p-2 bg-light rounded d-flex gap-2 flex-wrap">
           {QUICK_EMOJIS.map((emoji) => (
