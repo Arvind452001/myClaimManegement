@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="280" viewBox="0 0 400 280">
+  <rect width="400" height="280" rx="12" fill="#fff" stroke="#f8f1e6"/>
+  <rect x="24" y="24" width="120" height="120" rx="8" fill="#fd7e14"/>
+  <rect x="24" y="156" width="340" height="12" rx="6" fill="#6c757d"/>
+  <text x="24" y="200" font-family="Arial" font-size="14" fill="#6c757d">Compact</text>
+</svg>

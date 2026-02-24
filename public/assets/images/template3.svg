@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="280" viewBox="0 0 400 280">
+  <rect width="400" height="280" rx="12" fill="#fff" stroke="#e9f7ff"/>
+  <rect x="18" y="18" width="364" height="40" rx="6" fill="#0dcaf0"/>
+  <rect x="18" y="70" width="120" height="12" rx="6" fill="#6c757d"/>
+  <rect x="150" y="70" width="200" height="12" rx="6" fill="#6c757d"/>
+  <text x="24" y="162" font-family="Arial" font-size="14" fill="#6c757d">Technical</text>
+</svg>
