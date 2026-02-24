@@ -10,6 +10,7 @@ interface ConversationListProps {
   onSelectUser: (user: User) => void;
   onSelectConversation?: (conversation: Conversation) => void;
   onCreateGroupClick: () => void;
+  onFindNewUserClick?: () => void;
   isLoading?: boolean;
   currentUserId?: string;
 }
@@ -23,6 +24,7 @@ export const ConversationList: React.FC<ConversationListProps> = ({
   onSelectUser,
   onSelectConversation,
   onCreateGroupClick,
+  onFindNewUserClick,
   isLoading = false,
   currentUserId,
 }) => {
@@ -84,10 +86,10 @@ export const ConversationList: React.FC<ConversationListProps> = ({
         </div>
       </div>
 
-      {/* Create Group Button */}
-      <div className="p-2 border-bottom" style={{ borderColor: "rgba(255,255,255,0.2)" }}>
+      {/* Action Buttons */}
+      <div className="p-2 border-bottom d-flex gap-2" style={{ borderColor: "rgba(255,255,255,0.2)" }}>
         <button
-          className="btn btn-sm w-100"
+          className="btn btn-sm flex-grow-1"
           onClick={onCreateGroupClick}
           style={{
             backgroundColor: "rgba(255,255,255,0.2)",
@@ -97,7 +99,20 @@ export const ConversationList: React.FC<ConversationListProps> = ({
             padding: "6px 12px",
           }}
         >
-          + Create Group
+          + Group
+        </button>
+        <button
+          className="btn btn-sm flex-grow-1"
+          onClick={onFindNewUserClick}
+          style={{
+            backgroundColor: "rgba(255,255,255,0.2)",
+            color: "white",
+            border: "1px solid rgba(255,255,255,0.3)",
+            fontSize: "13px",
+            padding: "6px 12px",
+          }}
+        >
+          + New Chat
         </button>
       </div>
 
@@ -281,7 +296,8 @@ export const ConversationList: React.FC<ConversationListProps> = ({
           </>
         )}
 
-        {filteredUsers.length === 0 && filteredConversations.length === 0 && (
+        {/* Empty State - Conversations Section */}
+        {filteredConversations.length === 0 && filteredUsers.length === 0 && !searchQuery && (
           <div
             className="p-3 text-center"
             style={{
@@ -290,7 +306,21 @@ export const ConversationList: React.FC<ConversationListProps> = ({
               marginTop: "20px",
             }}
           >
-            {searchQuery ? "No results found" : "No conversations yet"}
+            No conversations yet. Start a new chat!
+          </div>
+        )}
+
+        {/* Empty State - Search Results */}
+        {filteredConversations.length === 0 && filteredUsers.length === 0 && searchQuery && (
+          <div
+            className="p-3 text-center"
+            style={{
+              fontSize: "13px",
+              opacity: 0.7,
+              marginTop: "20px",
+            }}
+          >
+            No results found for "{searchQuery}"
           </div>
         )}
       </div>

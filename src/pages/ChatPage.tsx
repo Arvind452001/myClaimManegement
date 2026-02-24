@@ -8,6 +8,7 @@ import { TypingIndicator } from "../components/chat/TypingIndicator";
 import { MessageInput } from "../components/chat/MessageInput";
 import { CreateGroupModal } from "../components/chat/CreateGroupModal";
 import { UserProfileModal } from "../components/chat/UserProfileModal";
+import { FindUserModal } from "../components/chat/FindUserModal";
 import { Message, Conversation, User } from "../types/chat";
 
 export default function ChatPage() {
@@ -33,6 +34,7 @@ export default function ChatPage() {
   const [typingUsers, setTypingUsers] = useState<string[]>([]);
   const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isFindUserModalOpen, setIsFindUserModalOpen] = useState(false);
   const [isCreatingGroup, setIsCreatingGroup] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -202,8 +204,6 @@ export default function ChatPage() {
     groupName: string,
     participantIds: string[]
   ) => {
-    console.log("[v0] Creating group with:", { groupName, participantIds, currentUserId: currentUser?._id });
-
     try {
       setIsCreatingGroup(true);
 
@@ -212,19 +212,14 @@ export default function ChatPage() {
         ? [...participantIds, currentUser._id]
         : participantIds;
 
-      console.log("[v0] All participants:", allParticipants);
-
       const res = await conversationAPI.createGroup({
         title: groupName,
         participants: allParticipants,
       });
 
-      console.log("[v0] Group creation response:", res);
-
       const conversation = res?.data?.data || res?.data;
 
       if (conversation && conversation._id) {
-        console.log("[v0] Group created successfully:", conversation._id);
         setSelectedConversation(conversation);
         setSelectedUser(null);
         setMessages([]);
@@ -235,11 +230,9 @@ export default function ChatPage() {
           socket.emit("joinConversation", conversation._id);
         }
       } else {
-        console.error("[v0] No conversation ID in response");
         alert("Failed to create group - no conversation returned");
       }
     } catch (err) {
-      console.error("[v0] Group creation failed", err);
       alert(`Failed to create group: ${err instanceof Error ? err.message : "Unknown error"}`);
     } finally {
       setIsCreatingGroup(false);
@@ -412,6 +405,7 @@ export default function ChatPage() {
           onSelectUser={handleSelectUser}
           onSelectConversation={handleSelectConversation}
           onCreateGroupClick={() => setIsGroupModalOpen(true)}
+          onFindNewUserClick={() => setIsFindUserModalOpen(true)}
           isLoading={loadingUsers}
           currentUserId={currentUser?._id}
         />
@@ -519,6 +513,18 @@ export default function ChatPage() {
         users={users}
         onClose={() => setIsProfileModalOpen(false)}
         isOnline={selectedUser ? onlineUsers.includes(selectedUser._id) : false}
+      />
+
+      <FindUserModal
+        isOpen={isFindUserModalOpen}
+        onClose={() => setIsFindUserModalOpen(false)}
+        users={users}
+        chattedUserIds={conversations
+          .filter((c) => c.type !== "GROUP")
+          .flatMap((c) => c.participants || [])
+          .filter((id) => id !== currentUser?._id)}
+        currentUserId={currentUser?._id}
+        onSelectUser={handleSelectUser}
       />
     </div>
   );
