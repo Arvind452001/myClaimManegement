@@ -38,26 +38,36 @@ export default function ChatPage() {
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const typingTimeoutRef = useRef<NodeJS.Timeout>();
 
-  /* ================= FETCH USERS ================= */
+  /* ================= FETCH USERS & CONVERSATIONS ================= */
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchData = async () => {
       try {
         setLoadingUsers(true);
-        const res = await staffAPI.getStaffMember();
-        const usersData = res?.data?.data || res?.data;
-
+        
+        // Fetch users
+        const userRes = await staffAPI.getStaffMember();
+        const usersData = userRes?.data?.data || userRes?.data;
         if (Array.isArray(usersData)) {
           setUsers(usersData);
         }
+
+        // Fetch conversations
+        if (currentUser?._id) {
+          const convRes = await conversationAPI.getConversations();
+          const conversationsData = convRes?.data?.data || convRes?.data || [];
+          if (Array.isArray(conversationsData)) {
+            setConversations(conversationsData);
+          }
+        }
       } catch {
-        setError("Failed to load users");
+        setError("Failed to load data");
       } finally {
         setLoadingUsers(false);
       }
     };
 
-    fetchUsers();
-  }, []);
+    fetchData();
+  }, [currentUser?._id]);
 
   /* ================= SOCKET: RECEIVE MESSAGE ================= */
   useEffect(() => {
