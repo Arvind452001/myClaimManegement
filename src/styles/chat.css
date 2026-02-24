@@ -1,0 +1,147 @@
+/* ================= CHAT ANIMATIONS ================= */
+
+/* Typing Indicator Animation */
+@keyframes pulse {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Message Entrance Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-item {
+  animation: slideIn 0.3s ease-in-out;
+}
+
+/* Reaction Popup Animation */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.emoji-picker {
+  animation: scaleIn 0.2s ease-out;
+}
+
+/* Smooth Scroll */
+.messages-container {
+  scroll-behavior: smooth;
+}
+
+/* Hover Effects */
+.conversation-item:hover {
+  background-color: rgba(78, 115, 223, 0.1);
+}
+
+.user-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Read Receipt Animation */
+@keyframes checkmark {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.read-receipt {
+  animation: checkmark 0.3s ease-in;
+  color: #4e73df;
+}
+
+/* Modal Animations */
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content {
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+/* Input Focus Animation */
+.message-input:focus {
+  border-color: #4e73df;
+  box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+/* Online Status Indicator */
+.online-indicator {
+  animation: pulse 2s infinite;
+}
+
+/* Connection Status */
+.connection-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.05);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chat-sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .chat-window {
+    width: 100%;
+  }
+}

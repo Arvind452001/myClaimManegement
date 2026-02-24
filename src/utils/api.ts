@@ -554,6 +554,84 @@ return res; // 🔥 IMPORTANT
 };
 
 // ===============================
+// CHAT MESSAGE APIs (Dummy - for future implementation)
+// ===============================
+export const messageStatusAPI = {
+  /* DUMMY API: Update message delivery status */
+  updateStatus: async (messageId: string, status: "sent" | "delivered" | "read") => {
+    // Mock API implementation - replace with real API when backend is ready
+    return {
+      success: true,
+      messageId,
+      status,
+      timestamp: new Date().toISOString(),
+    };
+  },
+
+  /* DUMMY API: Get message read receipts */
+  getReadReceipts: async (messageId: string) => {
+    return {
+      messageId,
+      readBy: [],
+      deliveredTo: [],
+    };
+  },
+};
+
+export const messageReactionAPI = {
+  /* DUMMY API: Add emoji reaction to message */
+  addReaction: async (messageId: string, emoji: string, userId: string) => {
+    return {
+      success: true,
+      messageId,
+      emoji,
+      userId,
+      timestamp: new Date().toISOString(),
+    };
+  },
+
+  /* DUMMY API: Remove emoji reaction from message */
+  removeReaction: async (messageId: string, emoji: string, userId: string) => {
+    return {
+      success: true,
+      messageId,
+      emoji,
+      userId,
+    };
+  },
+
+  /* DUMMY API: Get all reactions for a message */
+  getReactions: async (messageId: string) => {
+    return {
+      messageId,
+      reactions: [],
+    };
+  },
+};
+
+export const typingIndicatorAPI = {
+  /* DUMMY API: Emit typing event (handled via socket, this is just for reference) */
+  emitTyping: async (conversationId: string, userId: string) => {
+    // Typing is typically handled via socket.io, not HTTP
+    // This is a placeholder for consistency
+    return {
+      conversationId,
+      userId,
+      isTyping: true,
+    };
+  },
+
+  /* DUMMY API: Stop typing event */
+  stopTyping: async (conversationId: string, userId: string) => {
+    return {
+      conversationId,
+      userId,
+      isTyping: false,
+    };
+  },
+};
+
+// ===============================
 // Default Export (optional)
 // ===============================
 export default {
