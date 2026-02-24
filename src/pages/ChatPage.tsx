@@ -359,7 +359,7 @@ export default function ChatPage() {
     <div
       className="d-flex h-100"
       style={{
-        minHeight: "100vh",
+        height: "100%",
         backgroundColor: "#fff",
         overflow: "hidden",
       }}
@@ -371,7 +371,7 @@ export default function ChatPage() {
           borderRight: "1px solid #e9ecef",
           display: "flex",
           flexDirection: "column",
-          height: "100vh",
+          height: "100%",
           backgroundColor: "#ffffff",
         }}
       >
@@ -395,7 +395,7 @@ export default function ChatPage() {
           flex: 1,
           display: "flex",
           flexDirection: "column",
-          height: "100vh",
+          height: "100%",
           backgroundColor: "#ffffff",
         }}
       >
