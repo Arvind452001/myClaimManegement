@@ -236,8 +236,9 @@ export default function ChatPage() {
       reactions: [],
     };
 
+    // Only emit to socket - server will echo back via "receiveMessage"
+    // Don't add to local state here to avoid duplicate
     socket.emit("sendMessage", newMessage);
-    setMessages((prev) => [...prev, newMessage]);
     setInput("");
 
     // Emit stopped typing
