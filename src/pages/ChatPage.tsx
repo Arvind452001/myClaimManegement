@@ -9,7 +9,6 @@ import { MessageInput } from "../components/chat/MessageInput";
 import { CreateGroupModal } from "../components/chat/CreateGroupModal";
 import { UserProfileModal } from "../components/chat/UserProfileModal";
 import { Message, Conversation, User } from "../types/chat";
-import "../styles/chat.css";
 
 export default function ChatPage() {
   const { socket, isConnected } = useSocket();
@@ -360,26 +359,20 @@ export default function ChatPage() {
     <div
       className="d-flex h-100"
       style={{
-        height: "100%",
-        width: "100%",
-        background: "linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%)",
+        minHeight: "100vh",
+        backgroundColor: "#fff",
         overflow: "hidden",
-        borderRadius: "16px",
-        boxShadow: "0 4px 12px rgba(99, 102, 241, 0.1)",
-        boxSizing: "border-box",
       }}
     >
       {/* LEFT SIDEBAR - CONVERSATION LIST */}
       <div
         style={{
           width: "360px",
-          borderRight: "1px solid #e5e7eb",
+          borderRight: "1px solid #e9ecef",
           display: "flex",
           flexDirection: "column",
-          height: "100%",
-          background: "linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%)",
-          boxSizing: "border-box",
-          overflow: "hidden",
+          height: "100vh",
+          backgroundColor: "#ffffff",
         }}
       >
         <ConversationList
@@ -402,18 +395,15 @@ export default function ChatPage() {
           flex: 1,
           display: "flex",
           flexDirection: "column",
-          height: "100%",
-          background: "linear-gradient(180deg, #ffffff 0%, #f9fafb 100%)",
-          boxSizing: "border-box",
-          minWidth: 0,
-          overflow: "hidden",
+          height: "100vh",
+          backgroundColor: "#ffffff",
         }}
       >
         {!selectedConversation ? (
           <div
             className="d-flex justify-content-center align-items-center h-100 text-muted"
             style={{
-              background: "linear-gradient(135deg, #ffffff 0%, #f9fafb 100%)",
+              backgroundColor: "#f8f9fa",
             }}
           >
             <div className="text-center">
@@ -440,8 +430,6 @@ export default function ChatPage() {
               className="flex-grow-1 overflow-auto p-4"
               style={{
                 backgroundColor: "#ffffff",
-                boxSizing: "border-box",
-                minHeight: 0,
               }}
             >
               {messages
