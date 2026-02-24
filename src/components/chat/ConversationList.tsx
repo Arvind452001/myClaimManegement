@@ -29,14 +29,21 @@ export const ConversationList: React.FC<ConversationListProps> = ({
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredUsers = useMemo(() => {
+    // Get user IDs from conversations (direct chats only)
+    const chattedUserIds = conversations
+      .filter((c) => c.type !== "GROUP") // Only direct conversations
+      .flatMap((c) => c.participants || [])
+      .filter((id) => id !== currentUserId); // Exclude current user
+
     return users
       .filter((u) => u._id !== currentUserId)
+      .filter((u) => chattedUserIds.includes(u._id)) // Only show users we've chatted with
       .filter(
         (u) =>
           u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           (u.email?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false)
       );
-  }, [users, searchQuery, currentUserId]);
+  }, [users, conversations, searchQuery, currentUserId]);
 
   const filteredConversations = useMemo(() => {
     return conversations.filter((c) =>
